@@ -7,12 +7,15 @@ const Main = ({ pikimon  }) => {
         <h1>Liste des Pokémons</h1>
         <ul>
           {pikimon.map(pokemon => (
+            console.log(pokemon),
             <div key={pokemon.pokedexId}>
               <img src={pokemon.sprites.regular} alt="" />
-              <li>Nom Français: {pokemon.name.fr}</li>
-              <p>Nom Japonais: {pokemon.name.jp}</p>
-              <p>Numéro dans le pokedex: {pokemon.pokedexId}</p>
               <p>Génération: {pokemon.generation}</p>
+              <p>Numéro dans le pokedex: {pokemon.pokedexId}</p>
+              <p>Nom Français: {pokemon.name.fr}</p>
+              <p>Nom Japonais: {pokemon.name.jp}</p>
+              <p>Nom Anglais: {pokemon.name.en}</p>
+              <p>Type: {pokemon.types.map(type => type.name).join(' / ')} </p>
             </div>
           ))}
         </ul>

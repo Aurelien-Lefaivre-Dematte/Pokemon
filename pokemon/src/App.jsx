@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Main from '../components/main/Main'
 import Searchbar from '../components/searchbar/Searchbar'
+import searchByName from '../components/searchFunctions/SearchFunctions'
 import axios from 'axios'
 import './App.css'
 
@@ -24,21 +25,15 @@ function App() {
       });
   }, []); // on met un tableau vide pour que la requête ne se fasse qu'une seule fois
 
-  const handleSearch = (searchTerm) => {
-    // Filtrer les résultats en fonction du terme de recherche
-    const filteredResults = posts.filter(pokemon => {
-      // Vous pouvez personnaliser la logique de recherche ici.
-      // Par exemple, pour rechercher le terme de recherche dans le nom du Pokémon.
-      return pokemon.name.fr.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-
+  const handleSearchByName = (searchTerm) => {
+    const filteredResults = searchByName(posts, searchTerm); // Utilisez la fonction searchByName ici
     setFilteredPikimon(filteredResults); // Mettre à jour les résultats filtrés avec les résultats de la recherche
-
   };
+
 
   return (
     <>
-    <Searchbar onSearch={handleSearch} />
+    <Searchbar onSearch={handleSearchByName} />
     <Main pikimon = {filteredPikimon} /> {/* on passe le tableau posts en props à Main */}
     </>
   );
